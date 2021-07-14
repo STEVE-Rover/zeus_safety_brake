@@ -3,32 +3,42 @@
 
 #include <iostream>
 #include <ros/ros.h>
-#include <sensor_msgs/Joy.h>
-#include <geometry_msgs/Twist.h>
 
-class TeleopGamepad
+#include <pcl_ros/transforms.h>
+#include <tf2_ros/transform_listener.h>
+#include <tf2_ros/buffer.h>
+
+#include <geometry_msgs/Twist.h>
+#include <sensor_msgs/PointCloud2.h>
+
+//#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+//#include <tf2_sensor_msgs/tf2_sensor_msgs.h>
+#include <tf2/transform_datatypes.h>
+#include <tf2_eigen/tf2_eigen.h>
+
+
+class SafetyBrake
 {
     public:
-        TeleopGamepad(ros::NodeHandle nh, ros::NodeHandle private_nh);
+        SafetyBrake(ros::NodeHandle nh, ros::NodeHandle private_nh);
 
     private:
-        void joyCB(const sensor_msgs::Joy::ConstPtr& joy_msg);
+        void changeFrame(const sensor_msgs::PointCloud2::ConstPtr& cloud_in);
+
+
 
         // ROS variables
         ros::NodeHandle nh_;
         ros::NodeHandle private_nh_;
-        ros::Subscriber sub_joy_;
+        ros::Subscriber sub_PointCloud_;
         ros::Publisher pub_cmd_vel_;
+        ros::Publisher pub_test;
 
         // Parameters
-        int linear_vel_axis_;
-        int angular_vel_axis_;
-        int deadman_switch_;
-        int turbo_button_;
-        float max_linear_vel_;
-        float max_angular_vel_;
-        float turbo_max_linear_vel_;
-        float turbo_max_angular_vel_;
+        tf2_ros::Buffer tfBuffer;
+        tf2_ros::TransformListener* tf_listener;
+
+       
 };
 
 

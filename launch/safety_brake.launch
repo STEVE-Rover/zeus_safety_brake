@@ -6,6 +6,8 @@
     </node>
     -->
 
-    <node name="safety_brake" type="safety_brake" pkg="safety_brake" output="screen"/>
+    <node name="safety_brake_test" type="safety_brake" pkg="steve_safety_brake" output="screen">
+        <remap from="/cloud_in" to="/d435/depth/color/points"/>
+    </node>
     
 </launch>

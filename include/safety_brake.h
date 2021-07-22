@@ -14,20 +14,18 @@ class SafetyBrake
         SafetyBrake(ros::NodeHandle nh, ros::NodeHandle private_nh);
 
     private:
-        void polar2cartesian(const sensor_msgs::LaserScan::ConstPtr& cloud_in);
-
-
+        void polar2cartesian(const sensor_msgs::LaserScan::ConstPtr& laserscan);
+        void checkIfSafe(const geometry_msgs::Twist::ConstPtr& cmd_vel);
 
         // ROS variables
         ros::NodeHandle nh_;
         ros::NodeHandle private_nh_;
-        ros::Subscriber sub_PointCloud_;
+        ros::Subscriber sub_SafeCheck_;
+        ros::Subscriber sub_Laserscan_;
         ros::Publisher pub_cmd_vel_;
-        ros::Publisher pub_test;
 
         // Parameters
-        tf2_ros::Buffer tfBuffer;
-        tf2_ros::TransformListener* tf_listener;
+    
 
        
 };

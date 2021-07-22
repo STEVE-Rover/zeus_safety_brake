@@ -6,43 +6,27 @@ SafetyBrake::SafetyBrake(ros::NodeHandle nh, ros::NodeHandle private_nh):
 {
 
     // Set up subscribers and publishers
-    sub_PointCloud_ = nh_.subscribe("/cloud_in", 1, &SafetyBrake::changeFrame, this);
-    pub_cmd_vel_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1);
-    pub_test = nh_.advertise<sensor_msgs::PointCloud2>("test", 1);
+    sub_SafeCheck_ = nh_.subscribe("cmd_vel_in", 1, &SafetyBrake::checkIfSafe, this);
+    sub_Laserscan_ = nh_.subscribe("laserscan", 1, &SafetyBrake::polar2cartesian, this);
+    pub_cmd_vel_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel_safety_brake", 1);
 
-    // Initialize transformer
-    tf_listener = new tf2_ros::TransformListener(tfBuffer);
 
     // for debugging
     std::cout << "Params:" << std::endl;
     
 }
 
-
-void SafetyBrake::changeFrame(const sensor_msgs::PointCloud2::ConstPtr& cloud_in)
+void SafetyBrake::polar2cartesian(const sensor_msgs::LaserScan::ConstPtr& laserscan)
 {
-    sensor_msgs::PointCloud2 cloud_out;
 
-    geometry_msgs::TransformStamped transformStamped;
-    try {
-        
-        transformStamped = tfBuffer.lookupTransform(
-            "base_link", "d435_depth_optical_frame", ros::Time(0));
+}
 
-        // Debugging
-        std::cout << "******************" << std::endl;
-        std::cout << transformStamped << std::endl;
 
-        Eigen::Matrix4f mat = tf2::transformToEigen(transformStamped.transform).matrix().cast<float>();
+void SafetyBrake::checkIfSafe(const geometry_msgs::Twist::ConstPtr& cmd_vel)
+{
+    
 
-        pcl_ros::transformPointCloud(mat, *cloud_in, cloud_out);
-
-    } catch (tf2::TransformException &ex) {
-        ROS_WARN("%s", ex.what());
-        ros::Duration(1.0).sleep();
-    }
-
-    pub_test.publish(cloud_out);
+    pub_cmd_vel_.publish(cmd_vel);
 
 }
 

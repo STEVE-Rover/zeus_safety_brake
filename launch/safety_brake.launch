@@ -1,13 +1,8 @@
 <launch>
-    <!--
-    <node name="joy" type="joy_node" pkg="joy" >
-        <param name="dev" value="/dev/input/js0"/>
-        <param name="autorepeat_rate" value="10" />
-    </node>
-    -->
-
     <node name="safety_brake_test" type="safety_brake" pkg="steve_safety_brake" output="screen">
-        <remap from="/cloud_in" to="/d435/depth/color/points"/>
+        <remap from="cmd_vel_in" to="cmd_vel_watchdog"/>
+        <remap from="laserscan" to="obstacle_detector/scan"/>
+        <remap from="cmd_vel_safety_brake" to="cmd_vel_out"/>
     </node>
     
 </launch>

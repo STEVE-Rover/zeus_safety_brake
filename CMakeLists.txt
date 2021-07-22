@@ -7,11 +7,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   geometry_msgs
-  tf2_ros
-  pcl_ros
 )
-
-find_package(PCL 1.3 REQUIRED COMPONENTS common io)
 
 catkin_package()
 
@@ -20,10 +16,5 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-include_directories(${PCL_INCLUDE_DIRS})
-link_directories(${PCL_LIBRARY_DIRS})
-add_definitions(${PCL_DEFINITIONS})
-
 add_executable(safety_brake src/safety_brake.cpp)
 target_link_libraries(safety_brake ${catkin_LIBRARIES})
-target_link_libraries(safety_brake ${PCL_LIBRARIES})

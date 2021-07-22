@@ -4,17 +4,8 @@
 #include <iostream>
 #include <ros/ros.h>
 
-#include <pcl_ros/transforms.h>
-#include <tf2_ros/transform_listener.h>
-#include <tf2_ros/buffer.h>
-
 #include <geometry_msgs/Twist.h>
-#include <sensor_msgs/PointCloud2.h>
-
-//#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
-//#include <tf2_sensor_msgs/tf2_sensor_msgs.h>
-#include <tf2/transform_datatypes.h>
-#include <tf2_eigen/tf2_eigen.h>
+#include <sensor_msgs/LaserScan.h>
 
 
 class SafetyBrake
@@ -23,7 +14,7 @@ class SafetyBrake
         SafetyBrake(ros::NodeHandle nh, ros::NodeHandle private_nh);
 
     private:
-        void changeFrame(const sensor_msgs::PointCloud2::ConstPtr& cloud_in);
+        void polar2cartesian(const sensor_msgs::LaserScan::ConstPtr& cloud_in);
 
 
 

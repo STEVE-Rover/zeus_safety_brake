@@ -9,9 +9,9 @@ This package is for stopping the rover if an object is detected too close.
 
 
 ### Subscribed topics
-* joy (sensor_msgs/Joy): Gamepad joy message.
+* cmd_vel_watchdog (geometry_msgs/Twist): Velocity cmd from watchdog.
 ### Published topics
-* cmd_vel (geometry_msgs/Twist): output velocity command for the mobile base.
+* cmd_vel_out (geometry_msgs/Twist): output velocity command for the mobile base.
 
 ### Parameters
 * ~linear_vel_axis (int, default: 1): axis number for linear velocity.

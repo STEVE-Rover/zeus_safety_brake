@@ -4,6 +4,9 @@
 #include <iostream>
 #include <ros/ros.h>
 
+#include <cmath>
+#include <typeinfo>
+
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/LaserScan.h>
 
@@ -26,6 +29,15 @@ class SafetyBrake
 
         // Parameters
         int number_of_points;
+
+        struct point
+        {
+            double x;
+            double y;
+            float angle;
+        };
+
+        std::vector<point> data;
         
     
 

@@ -1,6 +1,5 @@
 #include <safety_brake.h>
 
-#include <typeinfo>
 
 SafetyBrake::SafetyBrake(ros::NodeHandle nh, ros::NodeHandle private_nh):
     nh_(nh),
@@ -21,14 +20,23 @@ SafetyBrake::SafetyBrake(ros::NodeHandle nh, ros::NodeHandle private_nh):
 void SafetyBrake::polar2cartesian(const sensor_msgs::LaserScan::ConstPtr& laserscan)
 {
     std::cout << "Debug :" << std::endl;
-    std::cout << typeid(laserscan).name() << std::endl;
-    std::cout << typeid(*laserscan).name() << std::endl; //this is the real value
 
-    float min_angle, max_angle;
-    float angle_inc;
+    float min_angle = laserscan->angle_min, max_angle = laserscan->angle_max;
+    float angle_inc = laserscan->angle_increment;
 
-    number_of_points = sizeof(laserscan->ranges)/sizeof(laserscan->ranges[0]);
-    std::cout << number_of_points << std::endl;
+    number_of_points = laserscan->ranges.size();
+    
+    for (int i = 0; i < number_of_points; i++){
+        float angle = min_angle + angle_inc*i;
+        std::cout << angle << std::endl;
+
+        struct point pt;
+        pt.x = laserscan->ranges[i]*sin(angle);
+        pt.y = laserscan->ranges[i]*cos(angle);
+        std::cout << "pt.x: " << pt.x << std::endl;
+        std::cout << "pt.y: " << pt.y << std::endl;
+    }
+
 }
 
 

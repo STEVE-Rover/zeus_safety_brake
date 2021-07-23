@@ -25,6 +25,8 @@ class SafetyBrake
         ros::Publisher pub_cmd_vel_;
 
         // Parameters
+        int number_of_points;
+        
     
 
        

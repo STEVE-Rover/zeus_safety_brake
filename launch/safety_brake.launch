@@ -3,6 +3,8 @@
         <remap from="cmd_vel_in" to="cmd_vel_watchdog"/>
         <remap from="laserscan" to="obstacle_detector/scan"/>
         <remap from="cmd_vel_safety_brake" to="cmd_vel_out"/>
+        <param name="min_width" value="1.2" />
+        <param name="min_length" value="1.4" />
     </node>
     
 </launch>

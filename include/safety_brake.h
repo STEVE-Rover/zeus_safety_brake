@@ -17,7 +17,7 @@ class SafetyBrake
         SafetyBrake(ros::NodeHandle nh, ros::NodeHandle private_nh);
 
     private:
-        void polar2cartesian(const sensor_msgs::LaserScan::ConstPtr& laserscan);
+        void updateCartesianPoints(const sensor_msgs::LaserScan::ConstPtr& laserscan);
         void checkIfSafe(const geometry_msgs::Twist::ConstPtr& cmd_vel);
 
         // ROS variables
@@ -30,11 +30,13 @@ class SafetyBrake
         // Parameters
         int number_of_points;
 
+        float min_width, min_length;
+
         struct point
         {
             double x;
             double y;
-            float angle;
+            double angle;
         };
 
         std::vector<point> data;

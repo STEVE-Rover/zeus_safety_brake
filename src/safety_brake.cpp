@@ -14,7 +14,7 @@ SafetyBrake::SafetyBrake(ros::NodeHandle nh, ros::NodeHandle private_nh):
 
     // Get params
     private_nh_.param<float>("safety_width", min_width, 1.2);
-    private_nh_.param<float>("safety_length", min_length, 1.4);
+    private_nh_.param<float>("safety_length", min_length, 1.7);
 
     // for debugging
     std::cout << "Params:" << std::endl;

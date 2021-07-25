@@ -65,13 +65,14 @@ void SafetyBrake::checkIfSafe(const geometry_msgs::Twist::ConstPtr& cmd_vel)
     for (const auto& point : data){
         if (abs(point.x) <= x_thresh && abs(point.y) <= y_thresh){
             status.data = false;
-            if (cmd_vel->linear.x < 0){ 
+            if (cmd_vel->linear.x > 0){ 
                 cmd_vel_safety_break.linear.x = 0;
                 break;
             }
         }
     }
     
+    pub_status_.publish(status);
     pub_cmd_vel_.publish(cmd_vel_safety_break);
 
 }

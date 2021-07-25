@@ -6,7 +6,7 @@
         <remap from="cmd_vel_safety_brake" to="cmd_vel_out"/>
 
         <param name="safety_width" value="1.2" />
-        <param name="safety_length" value="1.4" />
+        <param name="safety_length" value="1.75" />
     </node>
     
 </launch>

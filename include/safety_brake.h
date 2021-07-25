@@ -4,6 +4,7 @@
 #include <iostream>
 #include <ros/ros.h>
 
+#include <std_msgs/Bool.h>
 #include <cmath>
 #include <typeinfo>
 
@@ -26,11 +27,13 @@ class SafetyBrake
         ros::Subscriber sub_SafeCheck_;
         ros::Subscriber sub_Laserscan_;
         ros::Publisher pub_cmd_vel_;
+        ros::Publisher pub_status_;
 
         // Parameters
         int number_of_points;
-
+        std_msgs::Bool status;
         float min_width, min_length;
+        geometry_msgs::Twist cmd_vel_safety_break;
 
         struct point
         {

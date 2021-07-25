@@ -1,10 +1,12 @@
 <launch>
-    <node name="safety_brake_test" type="safety_brake" pkg="steve_safety_brake" output="screen">
+    <node name="safety_brake" type="safety_brake" pkg="steve_safety_brake" output="screen">
         <remap from="cmd_vel_in" to="cmd_vel_watchdog"/>
         <remap from="laserscan" to="obstacle_detector/scan"/>
+        <remap from="status" to="status/safety_break"/>
         <remap from="cmd_vel_safety_brake" to="cmd_vel_out"/>
-        <param name="min_width" value="1.2" />
-        <param name="min_length" value="1.4" />
+
+        <param name="safety_width" value="1.2" />
+        <param name="safety_length" value="1.4" />
     </node>
     
 </launch>

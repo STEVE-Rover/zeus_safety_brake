@@ -8,6 +8,7 @@ This package uses the Laserscan data produced by obstacle_detector_PC_to_LS and 
 * cmd_vel_watchdog (geometry_msgs/Twist): Velocity cmd from watchdog.
 ### Published topics
 * cmd_vel_out (geometry_msgs/Twist): output velocity command for the mobile base.
+* status (std_msgs/Bool): status of the brake. True means there is no obstacle near the robot and false means the opposite.
 
 ### Parameters
 * ~safety_width (float, default: 1.2): Width of the safety zone where if a point is detected it will stop the rover from moving forward.

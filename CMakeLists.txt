@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(steve_safety_brake)
+project(zeus_safety_brake)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp

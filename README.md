@@ -1,4 +1,4 @@
-# steve_safety_brake
+# zeus_safety_brake
 This package is for stopping the rover if an object is detected too close.
 
 ## How does it works

@@ -1,5 +1,5 @@
 <launch>
-    <node name="safety_brake" type="safety_brake" pkg="steve_safety_brake" output="screen">
+    <node name="safety_brake" type="safety_brake" pkg="zeus_safety_brake" output="screen">
         <remap from="cmd_vel_in" to="cmd_vel_watchdog"/>
         <remap from="laserscan" to="obstacle_detector/scan"/>
         <remap from="status" to="status/safety_break"/>
